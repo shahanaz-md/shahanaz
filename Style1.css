@@ -1,0 +1,50 @@
+body {
+  font-family: "Poetsen One", sans-serif;
+  margin: 20px;
+  background-color:#2A4759;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 100px;
+  margin-left: 300px;
+}
+.image-box {
+  width: 500px;
+  height: 800px;
+  background-color: #ab3232;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  position: static;
+  bottom: 0;
+}
+.content {
+  flex: 1;
+}
+h1 {
+  margin-bottom: 20px;
+  color:#EEEEEE;
+  font-weight: 300;
+  font-size: 50px;
+}
+p {
+  font-size: 20px;
+  font-weight: 10;
+  margin-bottom: 30px;
+ color: #DDDDDD;
+}
+button{
+    background-color: #f0473b;
+    border-radius: 4rem;
+    color: white;
+    font-family: "Poetsen One", sans-serif;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+}
+button:hover{
+    color: white;
+    background-color: #fd1201;
+}
