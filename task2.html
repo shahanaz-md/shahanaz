@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="loginform.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Butcherman&family=Comic+Relief:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poetsen+One&display=swap" rel="stylesheet">
+      <style>
+        *{
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        }    
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            min-height: 100vh;
+        }
+        h2{
+            text-align: center;
+            justify-content: center;
+        }
+        input[type=text],[type=password]{
+           width: 100%;
+           margin: 7px 0;
+           border: 1px solid;
+           border-radius: 3px;
+           padding: 10px 20px;
+           display: inline-block;
+           box-sizing: border-box;
+        }
+        .loginbutton{
+            width: 100%;
+            background-color: rgb(98, 141, 182);
+            color: white;
+            padding: 10px 10px;
+            margin:  8px 0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .loginbutton:hover{
+            opacity: 0.8;
+        }
+        
+        span.Forgetpass{
+            float: right;
+            padding-bottom:10px;
+        }
+        form{
+            padding: 40px;
+            width: 30%;
+            border: 2px solid rgb(64, 63, 63);
+            border-radius: 9px;
+           
+        }
+        button.createacct{
+            width: 100%;
+            background-color: rgb(49, 86, 107);
+            color: white;
+            padding: 10px 10px;
+            margin:  8px 0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .createacct:hover{
+            opacity: 0.8;
+        }
+    </style>
+
+
+    </head>
+        <body>
+            <form>
+                <div class="container">
+            <h2>Login Form</h2>
+           <label for="email">Email Id</label>
+           <input id="email" type="text" placeholder="abc@gmail.com" required>
+           <br>
+           <label for="password">Password</label>
+           <input id="password" type="password" placeholder="enter password" required>
+           <br>
+           <label for="rememberme">Remember me</label>
+           <input type="checkbox" id="rememberme">
+           <span class="Forgetpass">Forget<a href="#"> Password?</a></span>
+           <br>
+              <button class="loginbutton" type="submit">Login</button>
+              <br>
+              <label class="noaccount">Don't have an account?</label>
+           <br>        
+            <div class="createacct">
+            <button type="text" class="createacct">Create an account</button>
+        </div>
+            </div>
+        </form>
+        <script>
+          document.querySelector("form").addEventListener("submit", function(event) {
+           event.preventDefault(); // Prevent form from submitting
+
+             const emailInput = document.getElementById("email");
+             const passwordInput = document.getElementById("password");
+             const email = emailInput.value.trim();
+             const password = passwordInput.value.trim();
+             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+ 
+            let isValid = true;
+            let message = "";
+
+        if (!emailPattern.test(email)) {
+        message += "Please enter a valid email address.\n";
+        isValid = false;
+       }
+        // Validate password
+        if (password.length < 6) {
+        message += "Password must be at least 6 characters long.\n";
+        isValid = false;
+       }
+
+       if (!isValid) {
+           alert(message);
+       } 
+        else {
+            window.location.href = "todo.html";
+    }
+    });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List with Smart Icons</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    body {
+      background-color: #f3f6fa;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .todo-app {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 550px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    .input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button#addBtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button#addBtn:hover {
+      background-color: #45a049;
+    }
+
+    .todo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .todo-item {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .todo-item.done .task-text {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    .todo-item:hover .remove-btn {
+      display: block;
+    }
+
+    .task-left {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .task-left i {
+      margin-right: 10px;
+      color: #2c3e50;
+      font-size: 18px;
+    }
+
+    .task-left input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #4CAF50;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .remove-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-app">
+    <h1>My To-Do List</h1>
+
+    <div class="input-section">
+      <input type="text" id="taskInput" placeholder="Enter your task">
+      <button id="addBtn">Add</button>
+    </div>
+
+    <div class="todo-list" id="todoList">
+      <!-- Tasks will appear here -->
+    </div>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById("addBtn");
+    const taskInput = document.getElementById("taskInput");
+    const todoList = document.getElementById("todoList");
+
+    const getIcon = (text) => {
+      const t = text.toLowerCase();
+      if (t.includes("assignment")) return "fa-book";
+      if (t.includes("project")) return "fa-laptop-code";
+      if (t.includes("dishes")) return "fa-utensils";
+      if (t.includes("cleaning")) return "fa-broom";
+      if (t.includes("grocery")) return "fa-shopping-basket";
+      if (t.includes("clinic") || t.includes("doctor")) return "fa-user-doctor";
+      if (t.includes("webseries") || t.includes("netflix") || t.includes("show")) return "fa-tv";
+      return "fa-circle-dot"; // default
+    };
+
+    addBtn.addEventListener("click", function () {
+      const taskText = taskInput.value.trim();
+      if (taskText === "") {
+        alert("Please enter a task.");
+        return;
+      }
+
+      const iconClass = getIcon(taskText);
+
+      const item = document.createElement("div");
+      item.className = "todo-item";
+
+      item.innerHTML = `
+        <div class="task-left">
+          <input type="radio" onchange="markDone(this)">
+          <i class="fas ${iconClass}"></i>
+          <span class="task-text">${taskText}</span>
+        </div>
+        <button class="remove-btn" onclick="removeTask(this)">Remove</button>
+      `;
+
+      todoList.appendChild(item);
+      taskInput.value = "";
+    });
+
+    function markDone(radio) {
+      const item = radio.closest(".todo-item");
+      item.classList.add("done");
+    }
+
+    function removeTask(button) {
+      const item = button.closest(".todo-item");
+      item.remove();
+    }
+  </script>
+</body>
+</html>
